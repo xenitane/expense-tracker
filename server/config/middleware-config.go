@@ -1,4 +1,4 @@
-package configs
+package config
 
 import (
 	"strings"
@@ -8,11 +8,11 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/helmet"
 	"github.com/gofiber/fiber/v2/middleware/logger"
-	"github.com/xenitane/expense-tracker/server/variables"
+	"github.com/xenitane/expense-tracker/server/values"
 )
 
 func MiddlewareConfig() {
-	variables.App.Use(cors.New(cors.Config{
+	values.App.Use(cors.New(cors.Config{
 		ExposeHeaders: "Link",
 		MaxAge:        300,
 		AllowOrigins:  strings.Join([]string{"https://*", "https:/*"}, ","),
@@ -28,10 +28,10 @@ func MiddlewareConfig() {
 		AllowHeaders:     "*",
 		AllowCredentials: false,
 	})) // cors
-	variables.App.Use(compress.New(compress.Config{Level: compress.LevelBestSpeed})) // compress
-	variables.App.Use(helmet.New())                                                  // helmet
-	variables.App.Use(logger.New())                                                  // logger
-	variables.App.Use(func(c *fiber.Ctx) error {
+	values.App.Use(compress.New(compress.Config{Level: compress.LevelBestSpeed})) // compress
+	values.App.Use(helmet.New())                                                  // helmet
+	values.App.Use(logger.New())                                                  // logger
+	values.App.Use(func(c *fiber.Ctx) error {
 		c.Accepts("application/json")
 		c.AcceptsCharsets("utf-8")
 		return c.Next()

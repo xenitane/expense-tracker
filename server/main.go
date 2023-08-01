@@ -1,28 +1,14 @@
 package main
 
 import (
-	"fmt"
-	"log"
-
-	"github.com/gofiber/fiber/v2"
-
-	"github.com/xenitane/expense-tracker/server/configs"
-	"github.com/xenitane/expense-tracker/server/variables"
+	"github.com/xenitane/expense-tracker/server/setup"
 )
 
 func main() {
 
-	loadAndReadEnv() // loading the environment
+	setup.LoadAndReadEnv() // loading the environment
 
-	variables.App = fiber.New() // instantiating the web-server
+	defer (setup.ConnectDB())() // database-connection
 
-	defer configs.ConnectDB()  // database-connection
-	configs.MiddlewareConfig() // middleware-setup
-	configs.RouteConfig()      // routing-setup
-
-	log.Printf("Starting the web server at port: %v", variables.PORT) //starting the web-server
-
-	if err := variables.App.Listen(fmt.Sprintf(":%v", variables.PORT)); err != nil {
-		log.Fatalf("There was an error: %v\n while starting the server at port: %v", err, variables.PORT)
-	}
+	setup.StartApplication() // instantiating and setting up the web-server
 }
