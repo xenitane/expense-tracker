@@ -6,7 +6,7 @@ import (
 	"strconv"
 
 	"github.com/dotenv-org/godotenvvault"
-	"github.com/xenitane/expense-tracker/server/values"
+	"github.com/xenitane/expense-tracker/server/value"
 )
 
 func LoadAndReadEnv() {
@@ -15,19 +15,19 @@ func LoadAndReadEnv() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	values.PORT, err = strconv.Atoi(os.Getenv(values.C_PORT))
+	value.Env[value.ConstPort], err = strconv.Atoi(os.Getenv(value.ConstPort))
 	if err != nil {
 		log.Fatal(err)
 	}
-	if values.PORT <= 0 {
+	if value.Env[value.ConstPort].(int) <= 0 {
 		log.Fatal("inavlid port")
 	}
-	values.MONGOURI = os.Getenv(values.C_MONGOURI)
-	if values.MONGOURI == "" {
+	value.Env[value.ConstMongoURI] = os.Getenv(value.ConstMongoURI)
+	if value.Env[value.ConstMongoURI].(string) == "" {
 		log.Fatal("empty mongouri")
 	}
-	values.DBNAME = os.Getenv(values.C_DBNAME)
-	if values.DBNAME == "" {
+	value.Env[value.ConstDBName] = os.Getenv(value.ConstDBName)
+	if value.Env[value.ConstDBName].(string) == "" {
 		log.Fatal("empty dbname")
 	}
 }

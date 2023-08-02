@@ -3,7 +3,7 @@ package setup
 import (
 	"log"
 
-	"github.com/xenitane/expense-tracker/server/values"
+	"github.com/xenitane/expense-tracker/server/value"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -11,18 +11,18 @@ import (
 
 func ConnectDB() func() {
 	var err error
-	values.DB, err = mongo.Connect(values.Ctx, options.Client().ApplyURI(values.MONGOURI))
+	value.DBClient, err = mongo.Connect(value.Ctx, options.Client().ApplyURI(value.Env[value.ConstMongoURI].(string)))
 	if err != nil {
 		log.Fatal(err)
 	}
 	disconnect := func() {
-		if err := values.DB.Disconnect(values.Ctx); err != nil {
+		if err := value.DBClient.Disconnect(value.Ctx); err != nil {
 			panic(err)
 		}
 	}
-	values.Database = values.DB.Database(values.DBNAME)
+	value.Database = value.DBClient.Database(value.Env[value.ConstDBName].(string))
 
-	if err = values.DB.Ping(values.Ctx, readpref.Primary()); err != nil {
+	if err = value.DBClient.Ping(value.Ctx, readpref.Primary()); err != nil {
 		log.Fatal(err)
 	}
 	return disconnect
