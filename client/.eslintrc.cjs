@@ -2,17 +2,19 @@ module.exports = {
 	root: true,
 	env: { browser: true, es2020: true, node: true },
 	extends: [
-		'eslint:recommended',
-		'plugin:@typescript-eslint/recommended',
-		'plugin:react-hooks/recommended',
-		'plugin:react/jsx-runtime',
-
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:react/jsx-runtime"
 	],
-	ignorePatterns: ['dist', '.eslintrc.cjs'],
-	parser: '@typescript-eslint/parser',
-	plugins: ['react-refresh', 'react', '@typescript-eslint'],
+	ignorePatterns: ["dist", "config/jest"],
+	parser: "@typescript-eslint/parser",
+	plugins: ["react-refresh", "react", "@typescript-eslint"],
 	rules: {
-		'react-refresh/only-export-components': ['warn', { allowConstantExport: true },],
+		"react-refresh/only-export-components": [
+			"warn",
+			{ allowConstantExport: true }
+		],
 		indent: ["error", "tab"],
 		"linebreak-style": ["error", "unix"],
 		quotes: ["error", "double"],
@@ -20,8 +22,7 @@ module.exports = {
 	},
 	parserOptions: {
 		ecmaVersion: "latest",
-		sourceType: "module",
+		sourceType: "module"
 	},
-	overrides: [{ files: ".eslintrc.{js,cjs}" }],
-
-}
+	overrides: [{ files: ".eslintrc.{js,cjs}" }]
+};

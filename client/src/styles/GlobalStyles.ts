@@ -1,7 +1,7 @@
-import React from "react";
+import {NamedExoticComponent} from "react";
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle: React.NamedExoticComponent = createGlobalStyle`
+export const GlobalStyle: NamedExoticComponent = createGlobalStyle`
     *{
         margin: 0;
         padding: 0;
