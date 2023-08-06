@@ -2,8 +2,8 @@
     "jsc":{
         "target":"esnext",
         "parser":{
-            "syntax":"typescript",
-            "tsx":true,
+            "syntax":"javascript",
+            "jsx":true,
             "decorators":false,
             "dynamicImport":false
         },
