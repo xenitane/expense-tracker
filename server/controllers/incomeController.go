@@ -5,7 +5,6 @@ import (
 	"github.com/xenitane/expense-tracker/server/service"
 )
 
-func IncomeController(fiberApp *fiber.App) {
-	fiberApp.Group("/api/v1/income").Get("/", service.GetIncomes).Post("/", service.AddIncome).Get("/:id", service.GetIncome).Delete("/:id", service.DeleteIncome)
-
+func IncomeController(incomeRouter fiber.Router) {
+	incomeRouter.Get("/", service.GetIncomes).Post("/", service.AddIncome).Get("/:id", service.GetIncome).Delete("/:id", service.DeleteIncome)
 }

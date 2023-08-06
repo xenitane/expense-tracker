@@ -19,7 +19,6 @@ const AppStyled = styled.div`
 		border: 3px solid #fff;
 		backdrop-filter: blur(4.5px);
 		border-radius: 32px;
-		overflow: auto;
 		overflow-x: hidden;
 		&::-webkit-scrollbar {
 			width: 0;
@@ -36,16 +35,16 @@ function App() {
 
 	const displayData = () => {
 		switch (active) {
-			case 0:
-				return <Dashboard />;
-			case 1:
-				return <Transactions />;
-			case 2:
-				return <Incomes />;
-			case 3:
-				return <Expenses />;
-			default:
-				return <Dashboard />;
+		case 0:
+			return <Dashboard />;
+		case 1:
+			return <Transactions />;
+		case 2:
+			return <Incomes />;
+		case 3:
+			return <Expenses />;
+		default:
+			return <Dashboard />;
 		}
 	};
 

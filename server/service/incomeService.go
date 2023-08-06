@@ -5,6 +5,7 @@ import (
 	"github.com/xenitane/expense-tracker/server/model"
 	"github.com/xenitane/expense-tracker/server/repository"
 	"github.com/xenitane/expense-tracker/server/value"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func AddIncome(c *fiber.Ctx) error {
@@ -43,7 +44,7 @@ func GetIncomes(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"error":   "an error occoured while getting the records",
+			"error":   "an error occoured while getting the records" + err.Error(),
 		})
 	}
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
@@ -70,12 +71,18 @@ func GetIncome(c *fiber.Ctx) error {
 	})
 }
 func DeleteIncome(c *fiber.Ctx) error {
-	id := c.Params("id")
-	err := repository.DeleteIncome(id)
+	id, err := primitive.ObjectIDFromHex(c.Params("id"))
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"error":   "an error occoured while deleting the record(" + err.Error() + ")c",
+			"error":   "an error occoured while deleting the record(" + err.Error() + ")",
+		})
+	}
+	err = repository.DeleteIncome(id)
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"error":   "an error occoured while deleting the record(" + err.Error() + ")",
 		})
 	}
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{

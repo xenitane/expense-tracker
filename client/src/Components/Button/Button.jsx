@@ -1,4 +1,3 @@
-import { JSX, MouseEventHandler } from "react";
 import { styled } from "styled-components";
 
 const ButtonStyled = styled.button`

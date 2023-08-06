@@ -12,7 +12,7 @@ import (
 
 func GetExpenses() ([]model.ExpenseModel, error) {
 	var expense model.ExpenseModel
-	var expenses []model.ExpenseModel
+	var expenses []model.ExpenseModel = make([]model.ExpenseModel, 0)
 
 	expenseCollection := getCollection(value.ConstExpenseCollection)
 	cursor, err := expenseCollection.Find(value.Ctx, bson.D{}, &options.FindOptions{

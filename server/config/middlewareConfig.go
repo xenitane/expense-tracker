@@ -12,9 +12,8 @@ import (
 
 func MiddlewareConfig(FiberApp *fiber.App) {
 	FiberApp.Use(cors.New(cors.Config{
-		ExposeHeaders: "Link",
-		MaxAge:        300,
-		AllowOrigins:  strings.Join([]string{"https://*", "https:/*"}, ","),
+		MaxAge:       300,
+		AllowOrigins: strings.Join([]string{"https://*", "https://*"}, ","),
 		AllowMethods: strings.Join([]string{
 			fiber.MethodGet,
 			fiber.MethodPost,
@@ -33,6 +32,7 @@ func MiddlewareConfig(FiberApp *fiber.App) {
 	FiberApp.Use(func(c *fiber.Ctx) error {
 		c.Accepts("application/json")
 		c.AcceptsCharsets("utf-8")
+		c.Set("Access-Control-Allow-Origin", "*")
 		return c.Next()
 	})
 }

@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Button from "../Button/Button";
 import { plus } from "../../utils/icons";
 import { useGlobalContext } from "../../context/GlobalContext";
+import moment from "moment/moment";
 
 const FormStyled = styled.form`
 	display: flex;
@@ -56,11 +57,11 @@ const FormStyled = styled.form`
 	}
 `;
 
-function Form() {
+function IncomeForm() {
 	const [inputState, setInputState] = useState({
 		title: "",
-		amount: 0,
-		date: new Date(),
+		amount: "",
+		date: "",
 		category: "",
 		description: ""
 	});
@@ -74,14 +75,19 @@ function Form() {
 	};
 	const { addIncome } = useGlobalContext();
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		addIncome({
+		await addIncome({
 			...inputState,
-			id: null,
-			created_at: null,
-			updated_at: null,
-			type: null
+			date: moment(inputState.date).format("DD-MM-YYYY"),
+			amount: parseFloat(amount)
+		});
+		setInputState({
+			title: "",
+			amount: "",
+			date: "",
+			category: "",
+			description: ""
 		});
 	};
 
@@ -95,6 +101,7 @@ function Form() {
 					id="title"
 					placeholder="Salary Title"
 					onChange={handleInput("title")}
+					required
 				/>
 			</div>
 			<div className="input-control">
@@ -105,6 +112,7 @@ function Form() {
 					id="amount"
 					placeholder="Salary Amount"
 					onChange={handleInput("amount")}
+					required
 				/>
 			</div>
 			<div className="input-control">
@@ -112,10 +120,11 @@ function Form() {
 					id="date"
 					placeholderText="Enter Date"
 					selected={date}
-					dateFormat={"dd/MM/yyyy"}
+					dateFormat={"dd-MM-yyyy"}
 					onChange={(date) => {
 						setInputState({ ...inputState, date: date });
 					}}
+					required
 				/>
 			</div>
 			<div className="selects input-control">
@@ -148,6 +157,7 @@ function Form() {
 					cols={30}
 					rows={4}
 					onChange={handleInput("description")}
+					required={true}
 				></textarea>
 			</div>
 			<div className="submit-btn">
@@ -158,11 +168,10 @@ function Form() {
 					bRad={"30px"}
 					bg={"var(--color-accent)"}
 					color={"#fff"}
-					onClick={() => {}}
 				/>
 			</div>
 		</FormStyled>
 	);
 }
 
-export default Form;
+export default IncomeForm;

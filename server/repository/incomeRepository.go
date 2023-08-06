@@ -11,23 +11,18 @@ import (
 )
 
 func GetIncomes() ([]model.IncomeModel, error) {
-	var income model.IncomeModel
-	var incomes []model.IncomeModel
+	var incomes []model.IncomeModel = make([]model.IncomeModel, 0)
 
 	incomeCollection := getCollection(value.ConstIncomeCollection)
-	cursor, err := incomeCollection.Find(value.Ctx, bson.D{}, &options.FindOptions{
+	cursor, err := incomeCollection.Find(value.Ctx, bson.M{}, &options.FindOptions{
 		Sort: bson.D{{Key: "created_at", Value: -1}},
 	})
 	if err != nil {
 		defer cursor.Close(value.Ctx)
 		return incomes, err
 	}
-	for cursor.Next(value.Ctx) {
-		err := cursor.Decode(&income)
-		if err != nil {
-			return incomes, err
-		}
-		incomes = append(incomes, income)
+	if err = cursor.All(value.Ctx, &incomes); err != nil {
+		return incomes, err
 	}
 	return incomes, nil
 }
@@ -39,7 +34,7 @@ func GetIncomeByID(incomeID string) (model.IncomeModel, error) {
 	if err != nil {
 		return income, err
 	}
-	err = incomeCollection.FindOne(value.Ctx, bson.D{{Key: "_id", Value: objectID}}).Decode(&income)
+	err = incomeCollection.FindOne(value.Ctx, bson.M{"_id": objectID}).Decode(&income)
 	if err != nil {
 		return income, err
 	}
@@ -60,7 +55,7 @@ func SaveIncome(income *model.IncomeModel) (model.IncomeModel, error) {
 	return incomeRes, nil
 }
 
-func DeleteIncome(id string) error {
+func DeleteIncome(id primitive.ObjectID) error {
 	incomeCollection := getCollection(value.ConstIncomeCollection)
 	result, err := incomeCollection.DeleteOne(value.Ctx, bson.D{{Key: "_id", Value: id}})
 	if err != nil {

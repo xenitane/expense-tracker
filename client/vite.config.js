@@ -7,6 +7,13 @@ export default defineConfig({
 	root: process.cwd(),
 	server: {
 		port: 3000,
-		strictPort: true
+		strictPort: true,
+		cors: true,
+		proxy: {
+			"/api": {
+				target: "http://localhost:5000",
+				changeOrigin: true
+			}
+		}
 	}
 });
