@@ -11,7 +11,6 @@ import (
 )
 
 func GetExpenses() ([]model.ExpenseModel, error) {
-	var expense model.ExpenseModel
 	var expenses []model.ExpenseModel = make([]model.ExpenseModel, 0)
 
 	expenseCollection := getCollection(value.ConstExpenseCollection)
@@ -19,15 +18,10 @@ func GetExpenses() ([]model.ExpenseModel, error) {
 		Sort: bson.D{{Key: "created_at", Value: -1}},
 	})
 	if err != nil {
-		defer cursor.Close(value.Ctx)
 		return expenses, err
 	}
-	for cursor.Next(value.Ctx) {
-		err := cursor.Decode(&expense)
-		if err != nil {
-			return expenses, err
-		}
-		expenses = append(expenses, expense)
+	if err = cursor.All(value.Ctx, &expenses); err != nil {
+		return expenses, err
 	}
 	return expenses, nil
 }
