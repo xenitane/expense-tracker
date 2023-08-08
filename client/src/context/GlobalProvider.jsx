@@ -1,9 +1,8 @@
 import axios from "axios";
-import { createContext, useContext, useState } from "react";
+import { useState } from "react";
+import { GlobalContext } from "./GlobalContext";
 
-const GLobalContext = createContext();
-
-const GlobalProvider = ({ children }) => {
+function GlobalProvider({ children }) {
 	const [incomes, setIncomes] = useState([]);
 	const [expenses, setExpenses] = useState([]);
 	const [error, setError] = useState(null);
@@ -68,8 +67,18 @@ const GlobalProvider = ({ children }) => {
 			return pv + cv.amount;
 		}, 0);
 
+	const transactionHistory = () => {
+		const history = [
+			...incomes.map((income) => ({ ...income, type: true })),
+			...expenses.map((expense) => ({ ...expense, type: false })),
+		].sort((a, b) => {
+			return new Date(b.createdAt) - new Date(a.createdAt);
+		});
+		return history.slice(0, 3);
+	};
+
 	return (
-		<GLobalContext.Provider
+		<GlobalContext.Provider
 			value={{
 				addExpense,
 				getExpenses,
@@ -80,16 +89,15 @@ const GlobalProvider = ({ children }) => {
 				deleteIncome,
 				totalIncome,
 				expenses,
-				incomes
+				incomes,
+				transactionHistory,
+				error,
+				setError,
 			}}
 		>
 			{children}
-		</GLobalContext.Provider>
+		</GlobalContext.Provider>
 	);
-};
+}
 
 export default GlobalProvider;
-
-export const useGlobalContext = () => {
-	return useContext(GLobalContext);
-};

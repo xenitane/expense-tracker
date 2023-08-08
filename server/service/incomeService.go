@@ -16,6 +16,7 @@ func AddIncome(c *fiber.Ctx) error {
 			"error":   "error while parsing data",
 		})
 	}
+	income.TrimSpace()
 	if value.Validator.Struct(income) != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,

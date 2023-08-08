@@ -63,36 +63,38 @@ function ExpenseForm() {
 		amount: "",
 		date: "",
 		category: "",
-		description: ""
+		description: "",
 	});
 
 	const { title, amount, date, category, description } = inputState;
 
 	const handleInput = (name) => {
 		return (e) => {
+			setError(null);
 			setInputState({ ...inputState, [name]: e.target?.value });
 		};
 	};
-	const { addExpense } = useGlobalContext();
+	const { addExpense, error, setError } = useGlobalContext();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await addExpense({
 			...inputState,
 			date: moment(inputState.date).format("DD-MM-YYYY"),
-			amount: parseFloat(amount)
+			amount: parseFloat(amount),
 		});
 		setInputState({
 			title: "",
 			amount: "",
 			date: "",
 			category: "",
-			description: ""
+			description: "",
 		});
 	};
 
 	return (
 		<FormStyled onSubmit={handleSubmit}>
+			{error && <p className="error">{error}</p>}
 			<div className="input-control">
 				<input
 					type="text"
@@ -104,6 +106,7 @@ function ExpenseForm() {
 					required
 				/>
 			</div>
+
 			<div className="input-control">
 				<input
 					type="text"
@@ -115,18 +118,20 @@ function ExpenseForm() {
 					required
 				/>
 			</div>
+
 			<div className="input-control">
 				<DatePicker
 					id="date"
 					placeholderText="Enter Date"
 					selected={date}
-					dateFormat={"dd-MM-yyyy"}
+					dateFormat="dd-MM-yyyy"
 					onChange={(date) => {
 						setInputState({ ...inputState, date: date });
 					}}
 					required
 				/>
 			</div>
+
 			<div className="selects input-control">
 				<select
 					required
@@ -138,17 +143,27 @@ function ExpenseForm() {
 					<option value="" disabled>
 						Select Option
 					</option>
+
 					<option value="education">Education</option>
+
 					<option value="books">Books</option>
+
 					<option value="groceries">Groceries</option>
+
 					<option value="health">Health</option>
+
 					<option value="subscriptions">Subscriptions</option>
+
 					<option value="takeaways">Takeaways</option>
+
 					<option value="clothing">Clothing</option>
+
 					<option value="travelling">travelling</option>
+
 					<option value="other">Other</option>
 				</select>
 			</div>
+
 			<div className="input-control">
 				<textarea
 					name="description"
@@ -158,17 +173,18 @@ function ExpenseForm() {
 					cols={30}
 					rows={4}
 					onChange={handleInput("description")}
-					required={true}
-				></textarea>
+					required
+				/>
 			</div>
+
 			<div className="submit-btn">
 				<Button
-					name={"Add Income"}
+					name="Add Income"
 					icon={plus}
-					bPad={".8rem 1.6rem"}
-					bRad={"30px"}
-					bg={"var(--color-accent)"}
-					color={"#fff"}
+					bPad=".8rem 1.6rem"
+					bRad="30px"
+					bg="var(--color-accent)"
+					color="#fff"
 				/>
 			</div>
 		</FormStyled>

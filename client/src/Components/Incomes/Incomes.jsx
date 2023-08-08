@@ -46,17 +46,19 @@ function Incomes() {
 		<IncomesStyled>
 			<InnerLayout>
 				<h1>Incomes</h1>
+
 				<h2 className="total-income">
-					Total Income:{" "}
+					Total Income:
 					<span>
-						{dollar}
-						{totalIncome()}
+						{dollar} {totalIncome()}
 					</span>
 				</h2>
+
 				<div className="income-content">
 					<div className="form-container">
 						<IncomeForm />
 					</div>
+
 					<div className="incomes">
 						{incomes.map((income) => {
 							return (
@@ -68,7 +70,7 @@ function Incomes() {
 									date={income.date}
 									category={income.category}
 									description={income.description}
-									indicator={"var(--color-green)"}
+									indicator="var(--color-green)"
 									deleteItem={deleteIncome}
 								/>
 							);

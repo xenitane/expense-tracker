@@ -63,36 +63,38 @@ function IncomeForm() {
 		amount: "",
 		date: "",
 		category: "",
-		description: ""
+		description: "",
 	});
 
 	const { title, amount, date, category, description } = inputState;
 
 	const handleInput = (name) => {
 		return (e) => {
+			setError(null);
 			setInputState({ ...inputState, [name]: e.target?.value });
 		};
 	};
-	const { addIncome } = useGlobalContext();
+	const { addIncome, error, setError } = useGlobalContext();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		await addIncome({
 			...inputState,
 			date: moment(inputState.date).format("DD-MM-YYYY"),
-			amount: parseFloat(amount)
+			amount: parseFloat(amount),
 		});
 		setInputState({
 			title: "",
 			amount: "",
 			date: "",
 			category: "",
-			description: ""
+			description: "",
 		});
 	};
 
 	return (
 		<FormStyled onSubmit={handleSubmit}>
+			{error && <p className="error">{error}</p>}
 			<div className="input-control">
 				<input
 					type="text"
@@ -104,6 +106,7 @@ function IncomeForm() {
 					required
 				/>
 			</div>
+
 			<div className="input-control">
 				<input
 					type="text"
@@ -115,18 +118,20 @@ function IncomeForm() {
 					required
 				/>
 			</div>
+
 			<div className="input-control">
 				<DatePicker
 					id="date"
 					placeholderText="Enter Date"
 					selected={date}
-					dateFormat={"dd-MM-yyyy"}
+					dateFormat="dd-MM-yyyy"
 					onChange={(date) => {
 						setInputState({ ...inputState, date: date });
 					}}
 					required
 				/>
 			</div>
+
 			<div className="selects input-control">
 				<select
 					required
@@ -138,16 +143,25 @@ function IncomeForm() {
 					<option value="" disabled>
 						Select Option
 					</option>
+
 					<option value="salary">Salary</option>
+
 					<option value="freelancing">Freelancing</option>
+
 					<option value="investments">Investiments</option>
+
 					<option value="stocks">Stocks</option>
+
 					<option value="bitcoin">Bitcoin</option>
+
 					<option value="bank">Bank Transfer</option>
+
 					<option value="youtube">Youtube</option>
+
 					<option value="other">Other</option>
 				</select>
 			</div>
+
 			<div className="input-control">
 				<textarea
 					name="description"
@@ -157,17 +171,18 @@ function IncomeForm() {
 					cols={30}
 					rows={4}
 					onChange={handleInput("description")}
-					required={true}
-				></textarea>
+					required
+				/>
 			</div>
+
 			<div className="submit-btn">
 				<Button
-					name={"Add Income"}
+					name="Add Income"
 					icon={plus}
-					bPad={".8rem 1.6rem"}
-					bRad={"30px"}
-					bg={"var(--color-accent)"}
-					color={"#fff"}
+					bPad=".8rem 1.6rem"
+					bRad="30px"
+					bg="var(--color-accent)"
+					color="#fff"
 				/>
 			</div>
 		</FormStyled>

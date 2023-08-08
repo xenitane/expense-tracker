@@ -7,7 +7,6 @@ import Orb from "./Components/Orb/Orb";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Incomes from "./Components/Incomes/Incomes";
 import Expenses from "./Components/Expenses/Expenses";
-import Transactions from "./Components/Transactions/Transactions";
 
 const AppStyled = styled.div`
 	background: url(${(props) => props.theme.bg});
@@ -38,7 +37,7 @@ function App() {
 		case 0:
 			return <Dashboard />;
 		case 1:
-			return <Transactions />;
+			return <Dashboard />;
 		case 2:
 			return <Incomes />;
 		case 3:
@@ -49,11 +48,21 @@ function App() {
 	};
 
 	return (
-		<AppStyled theme={{ bg: bg }} className="App">
+		<AppStyled
+			theme={{ bg: bg }}
+			className="App"
+		>
 			{orbMemo}
+
 			<MainLayout>
-				<Navigation active={active} setActive={setActive} />
-				<main>{displayData()}</main>
+				<Navigation
+					active={active}
+					setActive={setActive}
+				/>
+
+				<main>
+					{displayData()}
+				</main>
 			</MainLayout>
 		</AppStyled>
 	);

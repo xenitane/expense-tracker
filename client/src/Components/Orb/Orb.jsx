@@ -6,7 +6,7 @@ const moveOrb = (data) => keyframes`
 		transform: translate(0,0);
 	}
 	50%{
-		transform: translate(${data.width / 1.2}px,${data.height / 1.5}px);
+		transform: translate(${data.width}px,${data.height / 2}px);
 	}
 	100%{
 		transform :translate(0,0);

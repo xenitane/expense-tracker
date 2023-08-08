@@ -15,17 +15,18 @@ func AddExpense(c *fiber.Ctx) error {
 			"error":   "error while parsing data",
 		})
 	}
+	expense.TrimSpace()
 	if value.Validator.Struct(expense) != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
 			"error":   "data validation failed",
 		})
 	}
-	insertedIncome, err := repository.SaveExpense(expense)
+	insertedExpense, err := repository.SaveExpense(expense)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"err":     "an error occoured while saving the record",
+			"err":     "an error occurred while saving the record",
 		})
 	}
 
@@ -33,7 +34,7 @@ func AddExpense(c *fiber.Ctx) error {
 		"success": true,
 		"message": "record saved successfully",
 		"data": fiber.Map{
-			"income": insertedIncome,
+			"expense": insertedExpense,
 		},
 	})
 }
@@ -43,7 +44,7 @@ func GetExpenses(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"error":   "an error occoured while getting the records",
+			"error":   "an error ocurred while getting the records",
 		})
 	}
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
@@ -75,7 +76,7 @@ func DeleteExpense(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"success": false,
-			"error":   "an error occoured while deleting the record(" + err.Error() + ")c",
+			"error":   "an error ocurred while deleting the record(" + err.Error() + ")c",
 		})
 	}
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{

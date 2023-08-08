@@ -122,33 +122,45 @@ function IncomeItem({
 
 	return (
 		<IncomeItemStyled $indicator={indicator}>
-			<div className="icon">{categoryIcon()}</div>
+			<div className="icon">
+				{categoryIcon()}
+			</div>
+
 			<div className="content">
-				<h5>{title}</h5>
+				<h5>
+					{title}
+				</h5>
+
 				<div className="inner-content">
 					<div className="text">
 						<p>
 							{dollar}
+
 							{amount}
 						</p>
+
 						<p>
 							{calender}
+
 							{date}
 						</p>
+
 						<p>
 							{comment}
+
 							{description}
 						</p>
 					</div>
+
 					<div className="btn-container">
 						<Button
 							icon={trash}
-							bPad={"1rem"}
-							bRad={"50%"}
-							bg={"var(--primary-color)"}
-							color={"#fff"}
-							iColor={"#fff"}
-							hColor={"var(--color-green)"}
+							bPad="1rem"
+							bRad="50%"
+							bg="var(--primary-color)"
+							color="#fff"
+							iColor="#fff"
+							hColor="var(--color-green)"
 							onClick={handleDelete}
 						/>
 					</div>

@@ -45,18 +45,26 @@ function Expenses() {
 	return (
 		<ExpensesStyled>
 			<InnerLayout>
-				<h1>Expenses</h1>
+				<h1>
+        Expenses
+				</h1>
+
 				<h2 className="total-expense">
-					Total Expense:{" "}
+    Total Expense:
+					{" "}
+
 					<span>
 						{dollar}
+
 						{totalExpense()}
 					</span>
 				</h2>
+
 				<div className="expense-content">
 					<div className="form-container">
 						<ExpenseForm />
 					</div>
+
 					<div className="expenses">
 						{expenses.map((expense) => {
 							return (
@@ -68,7 +76,7 @@ function Expenses() {
 									date={expense.date}
 									category={expense.category}
 									description={expense.description}
-									indicator={"var(--color-green)"}
+									indicator="var(--color-green)"
 									deleteItem={deleteExpense}
 								/>
 							);

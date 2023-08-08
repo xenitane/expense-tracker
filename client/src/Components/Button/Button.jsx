@@ -24,6 +24,7 @@ function Button({ name, icon, bg, bPad, color, bRad, onClick }) {
 			onClick={onClick}
 		>
 			{icon}
+
 			{name}
 		</ButtonStyled>
 	);

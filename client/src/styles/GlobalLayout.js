@@ -26,6 +26,42 @@ body{
 h1,h2,h3,h4,h5,h6{
     color:var(--primary-color);
 }
+
+@keyframes shake {
+    0%{
+        transform: translateX(0px);
+    }
+    12%{
+        transform: translateX(10);
+    }
+    25%{
+        transform: translateX(0);
+    }
+    38%{
+        transform: translateX(-10);
+    }
+    50%{
+        transform: translateX(0);
+    }
+    62%{
+        transform: translateX(10);
+    }
+    75%{
+        transform: translateX(0);
+    }
+    88%{
+        transform: translateX(-10);
+    }
+    100%{
+        transform: translateX(0);
+    }
+
+}
+
+.error{
+    color:red;
+    animation: shake .5s ease-in-out;
+}
 `;
 
 export default GlobalLayout;

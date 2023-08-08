@@ -75,12 +75,22 @@ function Navigation({ active, setActive }) {
 	return (
 		<NavStyle>
 			<div className="user-container">
-				<img src={avatar} alt="user-avatar" />
+				<img
+					src={avatar}
+					alt="user-avatar"
+				/>
+
 				<div className="text">
-					<h2>Tushar</h2>
-					<p>Your Money</p>
+					<h2>
+                Tushar
+					</h2>
+
+					<p>
+    Your Money
+					</p>
 				</div>
 			</div>
+
 			<ul className="menu-items">
 				{menuItems.map((mi) => {
 					return (
@@ -92,13 +102,24 @@ function Navigation({ active, setActive }) {
 							className={active === mi.id ? "active" : ""}
 						>
 							{mi.icon}
-							<span> {mi.title}</span>
+
+							<span> 
+								{" "}
+
+								{mi.title}
+							</span>
 						</li>
 					);
 				})}
 			</ul>
+
 			<div className="bottom-nav">
-				<li>{signout} Sign Out</li>
+				<li>
+					{signout}
+
+					{" "}
+                Sign Out
+				</li>
 			</div>
 		</NavStyle>
 	);
