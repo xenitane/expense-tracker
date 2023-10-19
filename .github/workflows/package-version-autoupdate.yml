@@ -27,5 +27,5 @@ jobs:
           npm version patch
           git push --follow-tags
         env:
-          GIT_USER: ${{ secrets.actor }}
+          GIT_USER: ${{ secrets.ACTOR }}
           GIT_PASSWORD: ${{ secrets.GHT }}
