@@ -55,7 +55,7 @@
 		"postcss": "^8.4.31",
 		"postcss-loader": "^7.3.3",
 		"styled-components": "^6.0.7",
-		"vite": "^4.4.5"
+		"vite": "^4.5.0"
 	},
 	"browserslist": {
 		"production": [
