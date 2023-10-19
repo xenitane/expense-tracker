@@ -2,6 +2,16 @@
 
 This is an Expense Tracking Application written in Golang and React with MongoDB as it's datastore. Use it to track your earnings and expenses with a detailed dashboard showing the pattern of these events and take insights on how to manage this.
 
+## Setup
+- Server:
+   1. Create the `.env` file in the server folder with the following keys:
+      - `PORT` : Port number for the backend server
+      - `MONGOURI` : Address for the MongoDB datastore to be used
+      - `DBNAME` : The name of the database to work with
+- Client:
+  1. Create the `.env.json` file in the client folder with the key `server` with these server options:
+     - `cors` : allowing cors
+     - `proxy` : proxy options for `api`, [refer](https://vitejs.dev/config/server-options.html#server-proxy).
 
 ### **🛠 &nbsp;Tech Stack**
 ![Visual Studio Code](https://img.shields.io/badge/visual_studio_code-%23007ACC.svg?style=for-the-badge&logo=visualstudiocode&logoColor=white)
