@@ -1,7 +1,13 @@
 {
 	"name": "expense-tracker",
 	"description": "a simple web application to help you track your income and expenses",
-	"keywords": [],
+	"keywords": [
+		"expenses",
+		"react",
+		"vite",
+		"javascript",
+		"nodejs"
+	],
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -9,10 +15,7 @@
 		"dev": "vite",
 		"build": "vite build",
 		"lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-		"lint:fix": "eslint . --fix --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview",
-		"test": "jest",
-		"coverage": "jest --collect-coverage"
+		"preview": "vite preview"
 	},
 	"repository": {
 		"type": "git",
@@ -29,7 +32,6 @@
 		"email": "tushar01.tjdsk@gmail.com"
 	},
 	"homepage": "https://github.com/xenitane/expense-tracker#readme",
-	"contributors": [],
 	"dependencies": {
 		"axios": "^1.4.0",
 		"chart.js": "^4.3.3",
