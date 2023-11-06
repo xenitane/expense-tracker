@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/dotenv-org/godotenvvault v0.6.0
-	github.com/go-playground/validator/v10 v10.15.5
+	github.com/go-playground/validator/v10 v10.16.0
 	github.com/gofiber/fiber/v2 v2.50.0
 	go.mongodb.org/mongo-driver v1.12.1
 )
