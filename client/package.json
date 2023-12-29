@@ -54,7 +54,7 @@
 		"eslint-plugin-react-refresh": "^0.4.5",
 		"postcss": "^8.4.32",
 		"postcss-loader": "^7.3.4",
-		"styled-components": "^6.1.4",
+		"styled-components": "^6.1.6",
 		"vite": "^5.0.10"
 	},
 	"browserslist": {
