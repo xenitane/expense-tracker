@@ -4,7 +4,7 @@ import { server } from "./.env.json";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	server,
+	...server,
 	plugins: [react()],
 	root: process.cwd(),
 });
