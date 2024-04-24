@@ -52,7 +52,7 @@
 		"eslint-plugin-react": "^7.34.0",
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.5",
-		"postcss": "^8.4.35",
+		"postcss": "^8.4.38",
 		"postcss-loader": "^8.1.1",
 		"styled-components": "^6.1.8",
 		"vite": "^5.2.10"
